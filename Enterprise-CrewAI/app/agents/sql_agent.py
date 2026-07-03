@@ -1,33 +1,14 @@
-from crewai import Agent
-
-from app.crew.llm import llm
+from app.tools.sql_tool import SQLQueryTool
 
 sql_agent = Agent(
 
     role="Senior SQL Engineer",
 
-    goal="""
-Generate efficient SQL queries
-for MySQL databases.
-""",
+    goal="Generate and execute SQL",
 
-    backstory="""
-You are an expert database engineer.
+    tools=[SQLQueryTool()],
 
-You understand joins,
-aggregations,
-group by,
-window functions,
-CTEs,
-date filtering,
-optimization,
-indexes,
-and analytics.
-""",
+    llm=llm,
 
-    verbose=True,
-
-    allow_delegation=False,
-
-    llm=llm
+    verbose=True
 )
